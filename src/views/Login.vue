@@ -14,7 +14,16 @@
           }"
         />
         <label for="email">Email</label>
-        <small class="helper-text invalid">Email</small>
+        <small
+          class="helper-text invalid"
+          v-if="$v.email.$dirty && !$v.email.required"
+          >This field can't be empty</small
+        >
+        <small
+          class="helper-text invalid"
+          v-else-if="$v.email.$dirty && !$v.email.email"
+          >Invalid Email</small
+        >
       </div>
       <div class="input-field">
         <input id="password" type="password" />
