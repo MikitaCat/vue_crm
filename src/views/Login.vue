@@ -26,9 +26,29 @@
         >
       </div>
       <div class="input-field">
-        <input id="password" type="password" />
+        <input
+          id="password"
+          type="password"
+          v-model="password"
+          :class="{
+            invalid:
+              ($v.password.$dirty && !$v.password.required) ||
+              ($v.password.$dirty && !$v.password.minLength),
+          }"
+        />
         <label for="password">Password</label>
-        <small class="helper-text invalid">Password</small>
+        <small
+          class="helper-text invalid"
+          v-if="$v.password.$dirty && !$v.password.required"
+          >Invalid password</small
+        >
+        <small
+          class="helper-text invalid"
+          v-else-if="$v.password.$dirty && !$v.password.minLength"
+          >Password must contains at least
+          {{ $v.password.$params.minLength.min }} characters. Now it contains
+          only {{ password.length }} characters</small
+        >
       </div>
     </div>
     <div class="card-action">
@@ -60,7 +80,7 @@ export default {
   },
   validations: {
     email: { email, required },
-    password: { required, minLength: minLength(6) },
+    password: { required, minLength: minLength(8) },
   },
   methods: {
     submitHandler() {
