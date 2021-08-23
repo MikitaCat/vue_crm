@@ -21,13 +21,13 @@ Vue.use(messagePlugin);
 Vue.filter("date", dateFilter);
 
 firebase.initializeApp({
-  apiKey: "AIzaSyA0OFoOm1mH3K7NDKv1Ent4xscSi62Ne04",
-  authDomain: "vue-js--crm.firebaseapp.com",
-  projectId: "vue-js--crm",
-  storageBucket: "vue-js--crm.appspot.com",
-  messagingSenderId: "370893718971",
-  appId: "1:370893718971:web:564c9a9beba66420c3f09e",
-  measurementId: "G-CT2EYEPKEZ",
+  apiKey: "AIzaSyDaeM2P3mEyGACTA05LfAj-GMwWBwgTNik",
+  authDomain: "vue-trainee.firebaseapp.com",
+  projectId: "vue-trainee",
+  storageBucket: "vue-trainee.appspot.com",
+  messagingSenderId: "267086211271",
+  appId: "1:267086211271:web:833b1ab5bf5096cde176e2",
+  measurementId: "G-5XWBMTFV7W",
 });
 
 let app;
