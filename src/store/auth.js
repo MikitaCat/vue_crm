@@ -6,11 +6,12 @@ export default {
       try {
         await firebase.auth().signInWithEmailAndPassword(email, password);
       } catch (e) {
+        commit("setError", e);
         throw e;
       }
     },
 
-    async register({ dispatch }, { email, password, userName }) {
+    async register({ dispatch, commit }, { email, password, userName }) {
       try {
         await firebase.auth().createUserWithEmailAndPassword(email, password);
         const uid = await dispatch("getUid");
@@ -22,6 +23,7 @@ export default {
             name: userName,
           });
       } catch (e) {
+        commit("setError", e);
         throw e;
       }
     },
