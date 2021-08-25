@@ -79,7 +79,11 @@ export default {
           title: this.title,
           limit: this.limit,
         });
-        console.log(category);
+        this.title = "";
+        this.limit = 100;
+        this.$v.$reset();
+        this.$message("Category has been created successfully");
+        this.$emit("created", category);
       } catch (e) {}
     },
   },

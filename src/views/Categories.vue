@@ -5,7 +5,7 @@
     </div>
     <section>
       <div class="row">
-        <CategoryCreate />
+        <CategoryCreate @created="addNewCategory" />
         <CategoryEdit />
       </div>
     </section>
@@ -21,6 +21,19 @@ export default {
   components: {
     CategoryCreate,
     CategoryEdit,
+  },
+
+  data() {
+    return {
+      categories: [],
+    };
+  },
+
+  methods: {
+    addNewCategory(category) {
+      this.categories.push(category);
+      console.log(this.categories);
+    },
   },
 };
 </script>
