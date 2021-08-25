@@ -12,10 +12,13 @@
 
     <form class="form" v-else>
       <div class="input-field">
-        <select ref="select">
-          <option v-for="category in categories" :key="category.id">{{
-            category.title
-          }}</option>
+        <select ref="select" v-model="category">
+          <option
+            v-for="category in categories"
+            :key="category.id"
+            :value="category.id"
+            >{{ category.title }}</option
+          >
         </select>
         <label>Select Category</label>
       </div>
@@ -63,13 +66,16 @@ export default {
       categories: [],
       loading: true,
       select: null,
+      category: null,
     };
   },
 
   async mounted() {
     this.categories = await this.$store.dispatch("fetchCategories");
     this.loading = false;
-
+    if (this.categories.length) {
+      this.category = this.categories[0].id;
+    }
     setTimeout(() => {
       this.select = M.FormSelect.init(this.$refs.select);
     }, 0);
