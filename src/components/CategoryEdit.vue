@@ -5,7 +5,7 @@
         <h4>Edit</h4>
       </div>
 
-      <form>
+      <form @submit.prevent="submitHandler">
         <div class="input-field">
           <select ref="select" v-model="current">
             <option
@@ -77,6 +77,25 @@ export default {
       limit: 100,
       current: null,
     };
+  },
+
+  methods: {
+    async submitHandler() {
+      if (this.$v.$invalid) {
+        this.$v.$touch();
+        return;
+      }
+
+      try {
+        const categoryData = {
+          id: this.current,
+          title: this.title,
+          limit: this.limit,
+        };
+        await this.$store.dispatch("updateCategory", categoryData);
+        this.$message("Category updated successfully");
+      } catch (e) {}
+    },
   },
 
   validations: {
