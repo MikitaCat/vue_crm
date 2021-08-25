@@ -94,6 +94,7 @@ export default {
         };
         await this.$store.dispatch("updateCategory", categoryData);
         this.$message("Category updated successfully");
+        this.$emit("updated", categoryData);
       } catch (e) {}
     },
   },

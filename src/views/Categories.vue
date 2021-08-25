@@ -7,7 +7,11 @@
       <Loader v-if="loading" />
       <div class="row" v-else>
         <CategoryCreate @created="addNewCategory" />
-        <CategoryEdit :categories="categories" />
+        <CategoryEdit
+          :categories="categories"
+          @updated="updateCategories"
+          :key="categories.length + updateCount"
+        />
       </div>
     </section>
   </div>
@@ -28,6 +32,7 @@ export default {
     return {
       categories: [],
       loading: true,
+      updateCount: 0,
     };
   },
 
@@ -40,7 +45,13 @@ export default {
   methods: {
     addNewCategory(category) {
       this.categories.push(category);
-      console.log(this.categories);
+    },
+
+    updateCategories(category) {
+      const index = this.categories.findIndex((c) => c.id === category.id);
+      this.categories[index].title = category.title;
+      this.categories[index].limit = category.limit;
+      this.updateCount++;
     },
   },
 };
