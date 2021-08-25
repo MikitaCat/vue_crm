@@ -22,7 +22,6 @@
 <script>
 import Navbar from "@/components/app/Navbar";
 import Sidebar from "@/components/app/Sidebar";
-import Loader from "../components/app/Loader.vue";
 export default {
   name: "main-layout",
   components: {
