@@ -13,7 +13,9 @@
     <form class="form" v-else>
       <div class="input-field">
         <select ref="select">
-          <option>name cat</option>
+          <option v-for="category in categories" :key="category.id">{{
+            category.title
+          }}</option>
         </select>
         <label>Select Category</label>
       </div>
