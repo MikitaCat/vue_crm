@@ -4,7 +4,13 @@
       <h3>New Entry</h3>
     </div>
 
-    <form class="form">
+    <Loader v-if="loading" />
+
+    <p class="center" v-else-if="!categories.length">
+      No categories yet <router-link to="/categories">Add Category</router-link>
+    </p>
+
+    <form class="form" v-else>
       <div class="input-field">
         <select ref="select">
           <option>name cat</option>
@@ -52,16 +58,25 @@ export default {
 
   data() {
     return {
-      loading: true,
       categories: [],
+      loading: true,
+      select: null,
     };
   },
 
   async mounted() {
-    this.categories = await this.$store.dispatch("fectCategories");
+    this.categories = await this.$store.dispatch("fetchCategories");
     this.loading = false;
 
-    this.select = M.FormSelect.init(this.$refs.select);
+    setTimeout(() => {
+      this.select = M.FormSelect.init(this.$refs.select);
+    }, 0);
+  },
+
+  destroyed() {
+    if (this.select && this.select.destroy) {
+      this.select.destroy();
+    }
   },
 };
 </script>
