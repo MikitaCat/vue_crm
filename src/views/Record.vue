@@ -1,65 +1,67 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Новая запись</h3>
+      <h3>New Entry</h3>
     </div>
 
     <form class="form">
-      <div class="input-field" >
-        <select>
-          <option
-          >name cat</option>
+      <div class="input-field">
+        <select ref="select">
+          <option>name cat</option>
         </select>
-        <label>Выберите категорию</label>
+        <label>Select Category</label>
       </div>
 
       <p>
         <label>
-          <input
-              class="with-gap"
-              name="type"
-              type="radio"
-              value="income"
-          />
-          <span>Доход</span>
+          <input class="with-gap" name="type" type="radio" value="income" />
+          <span>Income</span>
         </label>
       </p>
 
       <p>
         <label>
-          <input
-              class="with-gap"
-              name="type"
-              type="radio"
-              value="outcome"
-          />
-          <span>Расход</span>
+          <input class="with-gap" name="type" type="radio" value="outcome" />
+          <span>Expence</span>
         </label>
       </p>
 
       <div class="input-field">
-        <input
-            id="amount"
-            type="number"
-        >
-        <label for="amount">Сумма</label>
-        <span class="helper-text invalid">amount пароль</span>
+        <input id="amount" type="number" />
+        <label for="amount">Amount</label>
+        <span class="helper-text invalid">amount password</span>
       </div>
 
       <div class="input-field">
-        <input
-            id="description"
-            type="text"
-        >
-        <label for="description">Описание</label>
-        <span
-              class="helper-text invalid">description пароль</span>
+        <input id="description" type="text" />
+        <label for="description">Description</label>
+        <span class="helper-text invalid">description password</span>
       </div>
 
       <button class="btn waves-effect waves-light" type="submit">
-        Создать
+        Create
         <i class="material-icons right">send</i>
       </button>
     </form>
   </div>
 </template>
+
+<script>
+export default {
+  name: "Record",
+
+  data() {
+    return {
+      loading: true,
+      categories: [],
+    };
+  },
+
+  async mounted() {
+    this.categories = await this.$store.dispatch("fectCategories");
+    this.loading = false;
+
+    this.select = M.FormSelect.init(this.$refs.select);
+  },
+};
+</script>
