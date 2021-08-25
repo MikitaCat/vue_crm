@@ -26,7 +26,7 @@ export default {
 
         //also format data that comes from backend but this is more beautiful and smart
         return Object.keys(categories).map((key) => ({
-          ...categories,
+          ...categories[key],
           id: key,
         }));
       } catch (e) {
